@@ -53,9 +53,9 @@ export const App = () => {
   useEffect(() => {
     renderGallery();
   }, []);
-  useEffect(() => {
-    renderGallery();
-  }, [query, page, help]);
+  // useEffect(() => {
+  //   renderGallery();
+  // }, [query, page, help]);
 
   const handleSubmit = evt => {
     evt.preventDefault();
