@@ -47,19 +47,21 @@ export const App = () => {
       setImages((images = [...images, ...response.hits]));
     }
   };
+  const help = () => {
+    renderGallery();
+  };
   useEffect(() => {
     renderGallery();
   }, []);
   useEffect(() => {
     renderGallery();
-  }, [query, page]);
+  }, [query, page, help]);
 
   const handleSubmit = evt => {
     evt.preventDefault();
     const form = evt.currentTarget;
     let queryhandleSubmit = form.elements.query.value;
     setQuery((query = queryhandleSubmit));
-    console.log(query);
     setPage((page = 1));
     form.reset();
     trueLoad();
