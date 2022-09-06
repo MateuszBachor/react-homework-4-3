@@ -18,12 +18,12 @@ export const App = () => {
   //   modalImg: '',
   //   isLoad: false,
   // };
-  let [query, setQuery] = useState('');
-  let [page, setPage] = useState(1);
-  let [images, setImages] = useState([]);
-  let [modalImg, setModalImg] = useState('');
-  let [isLoad, setIsLoad] = useState(false);
-  let [isModalState, setIsModalState] = useState(false);
+  const [query, setQuery] = useState('');
+  const [page, setPage] = useState(1);
+  const [images, setImages] = useState([]);
+  const [modalImg, setModalImg] = useState('');
+  const [isLoad, setIsLoad] = useState(false);
+  const [isModalState, setIsModalState] = useState(false);
 
   const fetchImage = async (query, page) => {
     const baseUrl = 'https://pixabay.com/api';
@@ -41,45 +41,47 @@ export const App = () => {
     falseLoad();
 
     if (page === 1) {
-      setImages((images = response.hits));
+      setImages(() => response.hits);
     }
     if (page > 1) {
-      setImages((images = [...images, ...response.hits]));
+      setImages(() => [...images, ...response.hits]);
     }
   };
 
   useEffect(() => {
     renderGallery();
-  });
-  // useEffect(() => {
-  //   renderGallery();
-  // }, [query, page]);
+    // eslint-disable-next-line
+  }, []);
+  useEffect(() => {
+    renderGallery();
+    // eslint-disable-next-line
+  }, [query, page, isLoad]);
 
   const handleSubmit = evt => {
     evt.preventDefault();
     const form = evt.currentTarget;
     let queryhandleSubmit = form.elements.query.value;
-    setQuery((query = queryhandleSubmit));
-    setPage((page = 1));
+    setQuery(() => queryhandleSubmit);
+    setPage(1);
     form.reset();
     trueLoad();
   };
 
   const loadMore = () => {
-    setPage((page = page + 1));
+    setPage(() => page + 1);
   };
   const showModal = e => {
-    setModalImg((modalImg = e.target.dataset.source));
-    setIsModalState((isModalState = true));
+    setModalImg(() => e.target.dataset.source);
+    setIsModalState(() => true);
   };
   const clsModal = () => {
-    setIsModalState((isModalState = false));
+    setIsModalState(() => false);
   };
   const trueLoad = () => {
-    setIsLoad((isLoad = true));
+    setIsLoad(() => true);
   };
   const falseLoad = () => {
-    setIsLoad((isLoad = false));
+    setIsLoad(() => false);
   };
 
   return (
