@@ -47,15 +47,13 @@ export const App = () => {
       setImages((images = [...images, ...response.hits]));
     }
   };
-  const help = () => {
-    renderGallery();
-  };
+
   useEffect(() => {
     renderGallery();
-  }, []);
+  });
   // useEffect(() => {
   //   renderGallery();
-  // }, [query, page, help]);
+  // }, [query, page]);
 
   const handleSubmit = evt => {
     evt.preventDefault();
