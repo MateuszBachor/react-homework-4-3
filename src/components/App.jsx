@@ -36,14 +36,6 @@ export const App = () => {
       console.log('Error: ' + error);
     }
   };
-
-  useEffect(() => {
-    renderGallery();
-  }, []);
-  useEffect(() => {
-    renderGallery();
-  }, [query, page]);
-
   const renderGallery = async () => {
     const response = await fetchImage(query, page);
     falseLoad();
@@ -55,11 +47,18 @@ export const App = () => {
       setImages((images = [...images, ...response.hits]));
     }
   };
+  useEffect(() => {
+    renderGallery();
+  }, []);
+  useEffect(() => {
+    renderGallery();
+  }, [query, page]);
+
   const handleSubmit = evt => {
     evt.preventDefault();
     const form = evt.currentTarget;
-    let query = form.elements.query.value;
-    setQuery((query = query));
+    let queryhandleSubmit = form.elements.query.value;
+    setQuery((query = queryhandleSubmit));
     console.log(query);
     setPage((page = 1));
     form.reset();
